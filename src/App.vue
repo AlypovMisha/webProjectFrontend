@@ -9,3 +9,10 @@ export default defineComponent({
   name: 'App'
 });
 </script>
+
+<style>
+a {
+  text-decoration: none;
+  color: inherit;
+}
+</style>

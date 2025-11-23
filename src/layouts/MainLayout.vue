@@ -1,53 +1,90 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+    <div class="q-pa-md" style="padding-top: 0">
+      <!-- Container with max-width breakpoints (like Bootstrap's .container) -->
+      <div class="container_gay q-gutter-y-md" style="background-color: white">
+        <div class="row" style=" align-items: center">
+          <div class="col-1">
+            <RouterLink to="/"><p style="margin: 0; font-size: 2em">Sellzy</p></RouterLink>
+          </div>
+          <div class="col-2" style="display: flex; justify-content: space-around">
+            <q-btn icon="menu">Каталог</q-btn>
+          </div>
+          <div class="col-6">
+            <q-input label="Розыск">
+              <template v-slot:after>
+                <q-btn round dense flat icon="search" to="/search/"/>
+              </template>
+            </q-input>
+          </div>
+          <div class="col-3" style="display:flex;justify-content: center;">
+            <q-btn round flat icon="shopping_basket" to="/cart/"/>
+            <q-btn round flat icon="account_circle" to="/orders/"/>
+          </div>
+          <div class="col-12">
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
+            <q-page-container>
+              <router-view/>
+            </q-page-container>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+            <div style="margin-top: 50px; margin-bottom: 100px" class="row">
+              <div class="col-lg-3 col-md-6 col-12" style="display: flex; flex-direction: column; justify-content: space-between; padding-right: 50px">
+                <p style="margin: 0; font-size: 2em">Sellzy</p>
+                <p style="font-size: 12px; color: grey">Подпишись, чтобы первым быть в курсе новых акций и скидок на
+                  нашей площадке!</p>
+                <p style="font-size: 14px;">© 2025 Sellzy</p>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <h6 style="margin-bottom: 10px;margin-top: 0;">Покупателям</h6>
+                <p style="font-size: 14px; color: grey">Вопросы и ответы</p>
+                <p style="font-size: 14px; color: grey">Заказы и доставка</p>
+                <p style="font-size: 14px; color: grey">Возврат товаров</p>
+                <p style="font-size: 14px; color: grey">Оплата</p>
+                <p style="font-size: 14px; color: grey">Акции и скидки</p>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <h6 style="margin-bottom: 10px;margin-top: 0;">О нас</h6>
+                <p style="font-size: 14px; color: grey">Контакты</p>
+                <p style="font-size: 14px; color: grey">Социальные сети</p>
+                <p style="font-size: 14px; color: grey">Сотрудничество</p>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <h6 style="margin-bottom: 10px;margin-top: 0;">Подписаться на новости</h6>
+                <p style="font-size: 14px; color: grey">Подпишись, чтобы первым быть в курсе новых акций и скидок на
+                  нашей площадке!</p>
+                <p>
+                  <q-input label="Подписаться на новости">
+                    <template v-slot:after>
+                      <q-btn round dense flat icon="arrow_right"/>
+                    </template>
+                  </q-input>
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+                </p>
+                <p>
+                  <q-checkbox v-model="xer">
+                     <span>Соглашаюсь с <a href="http://google.com" target="_blank" style="color: black" @click.stop>Политикой конфидицеальности</a></span>
+                  </q-checkbox>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import {defineComponent, ref} from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import Product from "components/DEMO/Product.vue";
+import DemoProductsGrid from "components/DEMO/DemoProductsGrid.vue";
 
 const linksList = [
   {
@@ -98,20 +135,62 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
+    DemoProductsGrid,
+    Product,
     EssentialLink
   },
 
-  data () {
+  data() {
     return {
+      slide: 1,
+      xer: false,
       linksList,
       leftDrawerOpen: false
     }
   },
 
   methods: {
-    toggleLeftDrawer () {
+    toggleLeftDrawer() {
       this.leftDrawerOpen = !this.leftDrawerOpen
     }
   }
 })
 </script>
+
+<style>
+.container_gay {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Responsive container breakpoints similar to Bootstrap */
+@media (min-width: 576px) {
+  .container_gay {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container_gay {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container_gay {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container_gay {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container_gay {
+    max-width: 1320px;
+  }
+}
+</style>
