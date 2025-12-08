@@ -1,3 +1,18 @@
+<template>
+  <router-view />
+</template>
+
 <script>
-export { default } from './app/App/ui/App.vue'
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'App'
+});
 </script>
+
+<style>
+a {
+  text-decoration: none;
+  color: inherit;
+}
+</style>
