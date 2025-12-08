@@ -12,15 +12,15 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: [
-      'i18n',
-      'axios'
-    ],
+    // boot: [
+    //   'i18n',
+    //   'axios'
+    // ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
-    css: [
-      'app.css'
-    ],
+    // css: [
+    //   'app.css'
+    // ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
@@ -60,6 +60,13 @@ export default defineConfig((ctx) => {
       // distDir
 
       // extendViteConf (viteConf) {},
+      extendViteConf(viteConf) {
+        viteConf.resolve = viteConf.resolve || {}
+        viteConf.resolve.alias = {
+          ...(viteConf.resolve.alias || {}),
+          src: fileURLToPath(new URL('./src', import.meta.url))
+        }
+      },
       // viteVuePluginOptions: {},
 
       vitePlugins: [

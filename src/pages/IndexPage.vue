@@ -64,7 +64,8 @@
 
 <script>
 import { defineComponent } from 'vue';
-import DemoProductsGrid from "components/DEMO/DemoProductsGrid.vue";
+
+import DemoProductsGrid from '../features/DemoProductsGrid/ui/DemoProductsGrid.vue';
 
 export default defineComponent({
   name: 'IndexPage' ,
