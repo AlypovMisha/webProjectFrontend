@@ -1,5 +1,4 @@
-// features/productSearch/types.ts
-
+import { Product } from 'src/entities/Product/models/Product';
 /** Параметры поиска товаров */
 export interface ProductSearchParams {
   search?: string;
@@ -13,20 +12,6 @@ export interface ProductSearchParams {
   limit?: number;
 }
 
-/** Товар, который приходит с бэка */
-export interface ProductSearchItem {
-  product_id: number;
-  category_id: number;
-  shop_id: number;
-  name: string;
-  description: string;
-  photos: string; // JSON-строка
-  price: string;
-  created_at: string;
-  category_name: string;
-  shop_name: string;
-}
-
 /** Пагинация */
 export interface Pagination {
   page: number;
@@ -37,6 +22,6 @@ export interface Pagination {
 
 /** Ответ поиска */
 export interface ProductSearchResponse {
-  products: ProductSearchItem[];
+  products: Product[]; // используем единый Product
   pagination: Pagination;
 }
